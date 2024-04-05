@@ -84,4 +84,4 @@ jobs:
         -Dregion=${{ inputs.CLOUDHUB_REGION}} \
         -Dhttp.port=${{ inputs.HTTP_PORT}} \
         -Danypoint.platform.client_id=${{ secrets.ANYPOINT_PLATFORM_CLIENT_ID}} \
-        -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_PLATFORM_CLIENT_SECRET}} \        
+        -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_PLATFORM_CLIENT_SECRET}}      
