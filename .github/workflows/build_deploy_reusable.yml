@@ -60,13 +60,13 @@ jobs:
 
     - name: Populate settings.xml
       run: |
-        mkdir -p ~/.m2/
-        touch ~/.m2/settings.xml
-        echo "${{ secrets.MAVEN_SETTINGS }}" >> ~/.m2/settings.xml
+        mkdir -p /home/runner/.m2/
+        touch /home/runner/.m2/settings.xml
+        echo "${{ secrets.MAVEN_SETTINGS }}" >> /home/runner/.m2/settings.xml
 
     - name: JOB settings DETAILS
       run: |
-        cat ~/.m2/settings.xml
+        cat /home/runner/.m2/settings.xml
 
     - name: Print mvn version
       run: |
