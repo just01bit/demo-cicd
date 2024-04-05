@@ -3,44 +3,59 @@ name: ci_cd_pipeline.yml
 # Run on new release creation or when manually triggered
 on:
   workflow_dispatch:
-    inputs:
-      releaseType:
-        description: 'Where to release (staging or prod)?'     
-        required: true
-        default: 'staging'
+#    inputs:
+#      releaseType:
+#        description: 'Where to release (staging or prod)?'     
+#        required: true
+#        default: 'staging'
 env:
   ## Cloudhub Properties
-  CLOUDHUB_WORKERS: 2
+  CLOUDHUB_WORKERS: 1
   CLOUDHUB_WORKER_TYPE: MICRO
-  CLOUDHUB_REGION: us-east-01  
+  CLOUDHUB_REGION: ap-southeast-2  
 
   ## API specific 
   HTTP_PRIVATE_PORT: 8091  
 
 jobs:
-  staging:
+  DEV:
     uses: ./.github/workflows/build_deploy_reusable.yml
     with:
-      CLOUDHUB_ENVIRONMENT: "uat-01"
-      GITHUB_ENVIRONMENT: "staging"      
-      CLOUDHUB_WORKERS: "1"
-      CLOUDHUB_WORKER_TYPE: "MICRO"
-      CLOUDHUB_REGION: "ca-central-1"
+      CLOUDHUB_ENVIRONMENT: "DEV"
+      GITHUB_ENVIRONMENT: "DEV"      
+      CLOUDHUB_WORKERS: ${{ evn.CLOUDHUB_WORKERS}}
+      CLOUDHUB_WORKER_TYPE: ${{ evn.CLOUDHUB_WORKER_TYPE}}
+      CLOUDHUB_REGION: ${{ evn.CLOUDHUB_REGION}}
       HTTP_PRIVATE_PORT: "8091"
     secrets:
       CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}       
       CLOUDHUB_PASSWORD : ${{ secrets.CLOUDHUB_PASSWORD }}
 
-  prod:
-    if: github.event.inputs.releaseType == 'prod'  
-    needs: [staging]
+  SIT:
+    if: github.event.inputs.releaseType == 'SIT'  
+    needs: [DEV]
     uses: ./.github/workflows/build_deploy_reusable.yml
     with:
-      CLOUDHUB_ENVIRONMENT: "prod-01"
-      GITHUB_ENVIRONMENT: "prod"      
-      CLOUDHUB_WORKERS: "1"
-      CLOUDHUB_WORKER_TYPE: "MICRO"
-      CLOUDHUB_REGION: "ca-central-1"
+      CLOUDHUB_ENVIRONMENT: "SIT"
+      GITHUB_ENVIRONMENT: "SIT"      
+      CLOUDHUB_WORKERS: ${{ evn.CLOUDHUB_WORKERS}}
+      CLOUDHUB_WORKER_TYPE: ${{ evn.CLOUDHUB_WORKER_TYPE}}
+      CLOUDHUB_REGION: ${{ evn.CLOUDHUB_REGION}}
+      HTTP_PRIVATE_PORT: "8091"
+    secrets:
+      CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}        
+      CLOUDHUB_PASSWORD : ${{ secrets.CLOUDHUB_PASSWORD }}
+
+  PROD:
+    if: github.event.inputs.releaseType == 'PROD'  
+    needs: [SIT]
+    uses: ./.github/workflows/build_deploy_reusable.yml
+    with:
+      CLOUDHUB_ENVIRONMENT: "PROD"
+      GITHUB_ENVIRONMENT: "PROD"      
+      CLOUDHUB_WORKERS: ${{ evn.CLOUDHUB_WORKERS}}
+      CLOUDHUB_WORKER_TYPE: ${{ evn.CLOUDHUB_WORKER_TYPE}}
+      CLOUDHUB_REGION: ${{ evn.CLOUDHUB_REGION}}
       HTTP_PRIVATE_PORT: "8091"
     secrets:
       CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}        
