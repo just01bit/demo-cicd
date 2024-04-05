@@ -74,14 +74,4 @@ jobs:
 
     - name: Deploy for ${{ github.event.ref }} branch
       run: |
-        mvn -U -V -e -B -DskipTests deploy --file pom.xml -DmuleDeploy \
-        -DmuleVersion=${{ inputs.MULE_VERSION}} \
-        -Dconnected.app.client_id=${{ secrets.CONNECTED_APP_CLIENT_ID}} \
-        -Dconnected.app.client_secret=${{ secrets.CONNECTED_APP_CLIENT_SECRET}} \
-        -Denvironment=${{ inputs.CLOUDHUB_ENVIRONMENT}} \
-        -DworkerType=${{ inputs.CLOUDHUB_WORKER_TYPE}} \
-        -Dworkers=${{ inputs.CLOUDHUB_WORKERS}} \
-        -Dregion=${{ inputs.CLOUDHUB_REGION}} \
-        -Dhttp.port=${{ inputs.HTTP_PORT}} \
-        -Danypoint.platform.client_id=${{ secrets.ANYPOINT_PLATFORM_CLIENT_ID}} \
-        -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_PLATFORM_CLIENT_SECRET}}      
+        mvn -U -V -e -B -DskipTests deploy --file pom.xml -DmuleDeploy -DmuleVersion=${{ inputs.MULE_VERSION}} -Dconnected.app.client_id=${{ secrets.CONNECTED_APP_CLIENT_ID}} -Dconnected.app.client_secret=${{ secrets.CONNECTED_APP_CLIENT_SECRET}} -Denvironment=${{ inputs.CLOUDHUB_ENVIRONMENT}} -DworkerType=${{ inputs.CLOUDHUB_WORKER_TYPE}} -Dworkers=${{ inputs.CLOUDHUB_WORKERS}} -Dregion=${{ inputs.CLOUDHUB_REGION}} -Dhttp.port=${{ inputs.HTTP_PORT}} -Danypoint.platform.client_id=${{ secrets.ANYPOINT_PLATFORM_CLIENT_ID}} -Danypoint.platform.client_secret=${{ secrets.ANYPOINT_PLATFORM_CLIENT_SECRET}}     
