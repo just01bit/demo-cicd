@@ -30,8 +30,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-#    environment: 
-#      name: ${{ inputs.GITHUB_ENVIRONMENT }}    
+    environment: 
+      name: ${{ inputs.GITHUB_ENVIRONMENT }}    
     steps:
     - name: Dump GitHub context
       env:
@@ -42,13 +42,13 @@ jobs:
       with:
         ref: ${{ github.event.ref}}        
         
-#    - name: Set up JDK 8
-#      uses: actions/setup-java@v4.2.1
-#      with:
-#        distribution: 'temurin'
-#        cache: 'maven'
-#        java-version: 8
-#        server-id: github
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4.2.1
+      with:
+        distribution: 'temurin'
+        cache: 'maven'
+        java-version: 8
+        server-id: github
 
     - name: Populate settings.xml
       run: |
@@ -59,4 +59,14 @@ jobs:
     - name: JOB settings DETAILS
       run: |
         cat $HOME/runner/.m2/settings.xml
-        
+
+    - name: Deploy for ${{ github.event.ref }} branch
+      run: |
+        mvn -U -V -e -B -DskipTests deploy --file pom.xml -DmuleDeploy \
+        -Danypoint.userName=${{ secrets.CLOUDHUB_USERNAME}} \
+        -Danypoint.password=${{ secrets.CLOUDHUB_PASSWORD}} \
+        -Dcloudhub.environment=${{ inputs.CLOUDHUB_ENVIRONMENT}} \
+        -Dcloudhub.workerType=${{ inputs.CLOUDHUB_WORKER_TYPE}} \
+        -Dcloudhub.workers=${{ inputs.CLOUDHUB_WORKERS}} \
+        -Dcloudhub.region=${{ inputs.CLOUDHUB_REGION}} \
+        -Dhttp.private.port=${{ inputs.HTTP_PRIVATE_PORT}} \
