@@ -25,6 +25,8 @@ on:
         required: true    
       CLOUDHUB_PASSWORD:
         required: true
+      MAVEN_SETTINGS:
+        required: true        
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -52,7 +54,7 @@ jobs:
       run: |
         mkdir -p $HOME/runner/.m2/
         touch $HOME/runner/.m2/settings.xml
-        echo "${{ secrets.MAVEN_SETTINGS }}"
+        echo ${{ secrets.MAVEN_SETTINGS }}
 
     - name: JOB settings DETAILS
       run: |
