@@ -40,19 +40,19 @@ jobs:
       with:
         ref: ${{ github.event.ref}}        
         
-    - name: Set up JDK 8
-      uses: actions/setup-java@v4.2.1
-      with:
-        distribution: 'temurin'
-        cache: 'maven'
-        java-version: 8
-        server-id: github
+#    - name: Set up JDK 8
+#      uses: actions/setup-java@v4.2.1
+#      with:
+#        distribution: 'temurin'
+#        cache: 'maven'
+#        java-version: 8
+#        server-id: github
 
     - name: Populate settings.xml
       run: |
         mkdir -p $HOME/runner/.m2/
         touch $HOME/runner/.m2/settings.xml
-        echo ${{ secrets.MAVEN_SETTINGS }}
+        echo ${{ secrets.GITHUB_TOKEN }}
 
     - name: JOB settings DETAILS
       run: |
