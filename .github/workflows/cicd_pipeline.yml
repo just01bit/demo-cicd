@@ -29,4 +29,5 @@ jobs:
       HTTP_PRIVATE_PORT: "8091"
     secrets:
       CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}       
-      CLOUDHUB_PASSWORD : ${{ secrets.CLOUDHUB_PASSWORD }}
+      CLOUDHUB_PASSWORD: ${{ secrets.CLOUDHUB_PASSWORD }}
+      MAVEN_SETTINGS: ${{ secrets.MAVEN_SETTINGS }}
