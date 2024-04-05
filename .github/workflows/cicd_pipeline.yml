@@ -21,7 +21,7 @@ jobs:
   DEV:
     uses: ./.github/workflows/build_deploy_reusable.yml
     with:
-      CLOUDHUB_ENVIRONMENT: ${{ env.CLOUDHUB_WORKERS }}
+      CLOUDHUB_ENVIRONMENT: 1
       GITHUB_ENVIRONMENT: "DEV"      
       CLOUDHUB_WORKERS: 1
       CLOUDHUB_WORKER_TYPE: MICRO
