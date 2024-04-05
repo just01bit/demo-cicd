@@ -28,8 +28,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: 
-      name: ${{ inputs.GITHUB_ENVIRONMENT }}    
+#    environment: 
+#      name: ${{ inputs.GITHUB_ENVIRONMENT }}    
     steps:
     - name: Dump GitHub context
       env:
@@ -52,7 +52,7 @@ jobs:
       run: |
         mkdir -p $HOME/runner/.m2/
         touch $HOME/runner/.m2/settings.xml
-        echo ${{ secrets.GITHUB_TOKEN }}
+        echo ${{ secrets.MAVEN_SETTINGS }}
 
     - name: JOB settings DETAILS
       run: |
