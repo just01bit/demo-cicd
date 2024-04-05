@@ -21,13 +21,13 @@ jobs:
   DEV:
     uses: ./.github/workflows/build_deploy_reusable.yml
     with:
-      CLOUDHUB_ENVIRONMENT: 1
+      CLOUDHUB_ENVIRONMENT: "DEV"
       GITHUB_ENVIRONMENT: "DEV"      
       CLOUDHUB_WORKERS: 1
       CLOUDHUB_WORKER_TYPE: MICRO
       CLOUDHUB_REGION: ap-southeast-2
       HTTP_PORT: "8091"
-      MULE_VERSION: "4.5"
+      MULE_VERSION: "4.6"
     secrets:
       ANYPOINT_PLATFORM_CLIENT_ID: ${{ secrets.ANYPOINT_PLATFORM_CLIENT_ID }}       
       ANYPOINT_PLATFORM_CLIENT_SECRET: ${{ secrets.ANYPOINT_PLATFORM_CLIENT_SECRET }}
