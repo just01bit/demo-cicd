@@ -54,7 +54,7 @@ jobs:
       run: |
         mkdir -p $HOME/runner/.m2/
         touch $HOME/runner/.m2/settings.xml
-        echo ${{ secrets.MAVEN_SETTINGS }}
+        echo ${{ secrets.MAVEN_SETTINGS }} >> $HOME/runner/.m2/settings.xml
 
     - name: JOB settings DETAILS
       run: |
