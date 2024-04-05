@@ -48,11 +48,10 @@ jobs:
         java-version: 8
         server-id: github
 
-    - uses: s4u/maven-settings-action@v3.0.0
-      with:
-        servers: '[{"id": "mule-connected-app", "username": "${{ secrets.CLOUDHUB_USERNAME}}", "password": "${{ secrets.CLOUDHUB_USERNAME }}"}]'
+    - name: Populate settings.xml
+      run: echo ${{ secrets.MAVEN_SETTINGS }} >> $HOME/runner/.m2/settings.xml
 
     - name: JOB settings DETAILS
       run: |
-        cat /home/runner/.m2/settings.xml
+        cat $HOME/runner/.m2/settings.xml
         
