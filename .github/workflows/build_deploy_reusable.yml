@@ -50,6 +50,7 @@ jobs:
 
     - name: Populate settings.xml
       run: |
+        mkdir -p $HOME/runner/.m2/
         touch $HOME/runner/.m2/settings.xml
         echo ${{ secrets.MAVEN_SETTINGS }} >> $HOME/runner/.m2/settings.xml
 
