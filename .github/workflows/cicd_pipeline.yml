@@ -23,9 +23,9 @@ jobs:
     with:
       CLOUDHUB_ENVIRONMENT: "DEV"
       GITHUB_ENVIRONMENT: "DEV"      
-      CLOUDHUB_WORKERS: ${{ env.CLOUDHUB_WORKERS }}
-      CLOUDHUB_WORKER_TYPE: ${{ env.CLOUDHUB_WORKER_TYPE }}
-      CLOUDHUB_REGION: ${{ evn.CLOUDHUB_REGION }}
+      CLOUDHUB_WORKERS: 1
+      CLOUDHUB_WORKER_TYPE: MICRO
+      CLOUDHUB_REGION: ap-southeast-2
       HTTP_PRIVATE_PORT: "8091"
     secrets:
       CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}       
@@ -36,11 +36,11 @@ jobs:
     needs: [DEV]
     uses: ./.github/workflows/build_deploy_reusable.yml
     with:
-      CLOUDHUB_ENVIRONMENT: "SIT"
-      GITHUB_ENVIRONMENT: "SIT"      
-      CLOUDHUB_WORKERS: ${{ env.CLOUDHUB_WORKERS }}
-      CLOUDHUB_WORKER_TYPE: ${{ env.CLOUDHUB_WORKER_TYPE }}
-      CLOUDHUB_REGION: ${{ env.CLOUDHUB_REGION }}
+      CLOUDHUB_ENVIRONMENT: "DEV"
+      GITHUB_ENVIRONMENT: "DEV"      
+      CLOUDHUB_WORKERS: 1
+      CLOUDHUB_WORKER_TYPE: MICRO
+      CLOUDHUB_REGION: ap-southeast-2
       HTTP_PRIVATE_PORT: "8091"
     secrets:
       CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}        
@@ -51,11 +51,11 @@ jobs:
     needs: [SIT]
     uses: ./.github/workflows/build_deploy_reusable.yml
     with:
-      CLOUDHUB_ENVIRONMENT: "PROD"
-      GITHUB_ENVIRONMENT: "PROD"      
-      CLOUDHUB_WORKERS: ${{ env.CLOUDHUB_WORKERS }}
-      CLOUDHUB_WORKER_TYPE: ${{ env.CLOUDHUB_WORKER_TYPE }}
-      CLOUDHUB_REGION: ${{ env.CLOUDHUB_REGION }}
+      CLOUDHUB_ENVIRONMENT: "DEV"
+      GITHUB_ENVIRONMENT: "DEV"      
+      CLOUDHUB_WORKERS: 1
+      CLOUDHUB_WORKER_TYPE: MICRO
+      CLOUDHUB_REGION: ap-southeast-2
       HTTP_PRIVATE_PORT: "8091"
     secrets:
       CLOUDHUB_USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}        
