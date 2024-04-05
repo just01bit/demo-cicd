@@ -17,16 +17,24 @@ on:
       CLOUDHUB_REGION:
         required: true
         type: string                
-      HTTP_PRIVATE_PORT:
+      HTTP_PORT:
         required: true
-        type: string                        
+        type: string       
+      MULE_VERSION:
+        required: true
+        type: string         
     secrets:
-      CLOUDHUB_USERNAME:
-        required: true    
-      CLOUDHUB_PASSWORD:
+      ANYPOINT_PLATFORM_CLIENT_ID:
+        required: true
+      ANYPOINT_PLATFORM_CLIENT_SECRET:
         required: true
       MAVEN_SETTINGS:
-        required: true        
+        required: true
+      CONNECTED_APP_CLIENT_ID:
+        required: true
+      CONNECTED_APP_CLIENT_SECRET:
+        required: true
+        
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -63,10 +71,11 @@ jobs:
     - name: Deploy for ${{ github.event.ref }} branch
       run: |
         mvn -U -V -e -B -DskipTests deploy --file pom.xml -DmuleDeploy \
-        -Danypoint.userName=${{ secrets.CLOUDHUB_USERNAME}} \
-        -Danypoint.password=${{ secrets.CLOUDHUB_PASSWORD}} \
-        -Dcloudhub.environment=${{ inputs.CLOUDHUB_ENVIRONMENT}} \
-        -Dcloudhub.workerType=${{ inputs.CLOUDHUB_WORKER_TYPE}} \
-        -Dcloudhub.workers=${{ inputs.CLOUDHUB_WORKERS}} \
-        -Dcloudhub.region=${{ inputs.CLOUDHUB_REGION}} \
-        -Dhttp.private.port=${{ inputs.HTTP_PRIVATE_PORT}} \
+        -DmuleVersion=${{ inputs.MULE_VERSION}} \
+        -Dconnected.app.client_id=${{ secrets.CONNECTED_APP_CLIENT_ID}} \
+        -Dconnected.app.client_secret=${{ secrets.CONNECTED_APP_CLIENT_SECRET}} \
+        -Denvironment=${{ inputs.CLOUDHUB_ENVIRONMENT}} \
+        -DworkerType=${{ inputs.CLOUDHUB_WORKER_TYPE}} \
+        -Dworkers=${{ inputs.CLOUDHUB_WORKERS}} \
+        -Dregion=${{ inputs.CLOUDHUB_REGION}} \
+        -Dhttp.port=${{ inputs.HTTP_PORT}} \
