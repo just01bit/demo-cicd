@@ -49,7 +49,9 @@ jobs:
         server-id: github
 
     - name: Populate settings.xml
-      run: echo ${{ secrets.MAVEN_SETTINGS }} >> $HOME/runner/.m2/settings.xml
+      run: |
+        touch $HOME/runner/.m2/settings.xml
+        echo ${{ secrets.MAVEN_SETTINGS }} >> $HOME/runner/.m2/settings.xml
 
     - name: JOB settings DETAILS
       run: |
