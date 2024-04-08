@@ -22,4 +22,4 @@ jobs:
 
     steps:
     - name: test
-      run: echo $ {{ env.CLOUDHUB_REGION }}
+      run: echo ${{ env.CLOUDHUB_REGION }}
