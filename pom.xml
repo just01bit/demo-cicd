@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mycompany</groupId>
+	<groupId>dea25cb8-99ca-4741-ad3d-378461f7f0c7</groupId>
 	<artifactId>demo-cicd-impl</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
@@ -29,6 +29,48 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
+		
+				<configuration>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${muleVersion}</muleVersion>
+						<connectedAppClientId>${connected.app.client_id}</connectedAppClientId>
+						<connectedAppClientSecret>${connected.app.client_secret}</connectedAppClientSecret>
+						<connectedAppGrantType>client_credentials</connectedAppGrantType>
+						<applicationName>${environment}-${project.artifactId}</applicationName>
+						<environment>${environment}</environment>
+						<region>${region}</region>
+						<workers>${workers}</workers>
+						<workerType>${workerType}</workerType>
+						<properties>
+							<anypoint.platform.client_id>${anypoint.platform.client_id}</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>${anypoint.platform.client_secret}</anypoint.platform.client_secret>
+							<http.port>${http.port}</http.port>
+						</properties>
+					</cloudHubDeployment>
+				</configuration>	
+	
+				<!--
+				<configuration>
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>4.6-java8</muleVersion>
+						<connectedAppClientId>0ecef233b4934d01bb3718acbb34b8fa</connectedAppClientId>
+						<connectedAppClientSecret>81a33116561d4CD5BB76cd778Cb3CfDe</connectedAppClientSecret>
+						<connectedAppGrantType>client_credentials</connectedAppGrantType>
+						<applicationName>dev-demo-cicd-impl</applicationName>
+						<environment>DEV</environment>
+						<region>ap-southeast-2</region>
+						<workers>1</workers>
+						<workerType>MICRO</workerType>
+						<properties>
+							<anypoint.platform.client_id>2528b12293bb4ec4badc0af331309655</anypoint.platform.client_id>
+							<anypoint.platform.client_secret>DB8424fB944745E198dDE27E283b864f</anypoint.platform.client_secret>
+							<http.port>8091</http.port>
+						</properties>
+					</cloudHubDeployment>
+				</configuration>
+				-->			
 			</plugin>
 		</plugins>
 	</build>
