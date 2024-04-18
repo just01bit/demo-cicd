@@ -15,7 +15,7 @@ env:
   CLOUDHUB_REGION: ap-southeast-2  
 
   ## API specific
-  MULE_VERSION: "4.6-java8"
+  MULE_VERSION: "4.6-java17"
   HTTP_PORT: 8091  
 
 jobs:
