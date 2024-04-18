@@ -68,9 +68,10 @@ jobs:
       run: |
         cat /home/runner/.m2/settings.xml
 
-    - name: Print mvn version
+    - name: Print mvn version & java version
       run: |
-        mvn -version        
+        mvn -version
+        java -version
 
     - name: Deploy for ${{ github.event.ref }} branch
       run: |
